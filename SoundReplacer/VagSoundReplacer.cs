@@ -2,14 +2,12 @@
 {
     public class VagSoundReplacer
     {
-        private readonly string _path;
-        private VagSoundData _soundData;
+        private readonly VagSoundDataManager _soundData;
         public VagSoundReplacer(string path)
         {
-            _path = path;
-            _soundData = new VagSoundData(path);
+            _soundData = new VagSoundDataManager(path);
         }
-        public VagSoundBlock[] GetSoundData() 
+        public VagDataBlock[] GetSoundData() 
         {
             return _soundData.Blocks;
         }

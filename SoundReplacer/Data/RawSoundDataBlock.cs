@@ -23,7 +23,7 @@
             fileStream.Read(bytes);
             if (bytes.SequenceEqual(_head))
             {
-                throw new FormatException("The format must be RAW without sgxd header.");
+                throw new FormatException($"[{nameof(RawSoundDataBlock)}] : The format must be RAW without sgxd header.");
             }
             _start = 0;
             _length = (int)fileStream.Length;
@@ -38,7 +38,7 @@
         {
             if (start < 1)
             {
-                throw new ArgumentException("Start position cannot be zero or less without providing path");
+                throw new ArgumentException($"[{nameof(RawSoundDataBlock)}] : Start position cannot be zero or less without providing path");
             }
             _path = "";
             _start = start;

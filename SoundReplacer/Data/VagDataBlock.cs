@@ -3,9 +3,9 @@
     /// <summary>
     /// Metadata of one sound.
     /// </summary>
-    public record VagSoundBlock
+    public record VagDataBlock
     {
-        public string Name { get; init; }
+        public VagBlockInfo Info { get; init; }
         public VagWavBlock Wav { get; init; }
     }
 }

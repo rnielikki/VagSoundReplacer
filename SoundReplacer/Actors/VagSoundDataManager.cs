@@ -5,7 +5,7 @@ namespace SoundReplacer
     /// <summary>
     /// Contains original sound data and its metadata.
     /// </summary>
-    internal class VagSoundData
+    internal class VagSoundDataManager
     {
         private readonly string _inputPath;
         private readonly string _fileName;
@@ -13,9 +13,11 @@ namespace SoundReplacer
         private long _wavHeaderAddr;
         private int _wavAmount;
         private byte[] _hash;
-        public VagSoundBlock[] Blocks { get; private set; }
 
-        internal VagSoundData(string path)
+        private readonly NameAliasManager _nameAliasManager = new();
+        public VagDataBlock[] Blocks { get; private set; }
+
+        internal VagSoundDataManager(string path)
         {
             _inputPath = path;
             _fileName = Path.GetFileNameWithoutExtension(path);
@@ -30,15 +32,15 @@ namespace SoundReplacer
             _wavHeaderAddr = metaSearcher.SearchFor(new byte[] { 0x57, 0x41, 0x56, 0x45 });
             if (_wavHeaderAddr < 0)
             {
-                throw new FormatException("[MetadataSearcher] Cannot find the header. Check if input file is correct.");
+                throw new FormatException($"[{nameof(MetadataSearcher)}] Cannot find the header. Check if input file is correct.");
             }
             else if (_wavHeaderAddr == 0x10)
             {
-                throw new FormatException("[MetadataSearcher] The target file looks like ATRAC format. Please use another method to apply your music :)");
+                throw new FormatException($"[{nameof(MetadataSearcher)}] The target file looks like ATRAC format. Please use another method to apply your music :)");
             }
             _wavAmount = dataReader.GetInt(_wavHeaderAddr + 0xc);
             _wavHeaderAddr += 0x10;
-            Blocks = new VagSoundBlock[_wavAmount];
+            Blocks = new VagDataBlock[_wavAmount];
 
             var nameHeaderAddr = metaSearcher.SearchFor(new byte[] { 0x4E, 0x41, 0x4D, 0x45 });
             var nameAmount = dataReader.GetInt(nameHeaderAddr + 0xc);
@@ -66,9 +68,10 @@ namespace SoundReplacer
             }
             for (short i = 0; i < _wavAmount; i++)
             {
-                Blocks[i] = new VagSoundBlock
+                var name = names.ContainsKey(i) ? names[i] : $"{_fileName}#{i}";
+                Blocks[i] = new VagDataBlock
                 {
-                    Name = names.ContainsKey(i) ? names[i] : $"{_fileName}#{i}",
+                    Info = _nameAliasManager.GetBlockInfo(name),
                     Wav = GetWavBlocks(_wavHeaderAddr + i * 0x38, dataReader)
                 };
             }
@@ -140,7 +143,7 @@ namespace SoundReplacer
                     length: dataReader.GetInt(offset + 0x2C),
                     panleft: dataReader.GetShort(offset + 0x18),
                     panright: dataReader.GetShort(offset + 0x1A),
-                    bitrate: dataReader.GetInt(offset + 0xC)
+                    sampleRate: dataReader.GetInt(offset + 0xC)
                     );
         private KeyValuePair<short, string> GetName(long offset, BinaryDataReader dataReader) =>
             new KeyValuePair<short, string>(

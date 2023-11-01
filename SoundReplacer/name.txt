@@ -1,0 +1,30 @@
+# Hideout
+hideout_all_01	HO Blacksmith	16000
+hideout_all_02	HO Barracks	16000
+hideout_all_03	HO Armoury	16000
+hideout_all_04	HO Herogate	16000
+hideout_all_05	HO Sukopon	16000
+hideout_all_06	HO Team Totem	16000
+hideout_all_07	HO Battle Gate	16000
+hideout_all_08	HO Mission Obelisk	16000
+hideout_all_09	HO Silver Hoshipon	16000
+hideout_all_10	HO Meden Stone	16000
+# PTP_RESULT
+result_05_2m	Levelup	11025
+result_06	Class Change	16000
+# PTP_BTL_BGM_VOICE
+kari_L1_pata.vag	Lv1 March	11025
+kari_L1_pon.vag	Lv1 Attack	11025
+kari_L1_cyaka.vag	Lv1 Defend	11025
+kaesi_nige_lv1	Lv1 Dodge	11025
+kaesi_tame_lv1	Lv1 Charge	11025
+jump_D_L1	Lv1 Jump	11025
+sawagu_L1	Lv1 Party	11025
+kaesi_nige_lv2	Lv2 Dodge	11025
+kaesi_tame_lv2	Lv2 Charge	11025
+jump_D_L2	Lv2 Jump	11025
+sawagu_L2	Lv2 Party	11025
+kaesi_nige_lv3	Lv3 Dodge	11025
+kaesi_tame_lv3	Lv3 Charge	11025
+jump_D_L3	Lv3 Jump	11025
+sawagu_L3	Lv3 Party	11025
