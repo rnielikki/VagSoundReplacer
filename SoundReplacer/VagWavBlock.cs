@@ -11,16 +11,14 @@
         public int PanLeft { get; init; }
         public int PanRight { get; init; }
 
-        internal byte[] GetWav() => SoundDataBlock.ReadWav();
+        internal byte[] GetWav(BinaryDataReader dataReader) => SoundDataBlock.ReadWav(dataReader);
         internal VagWavBlock(BinaryDataReader reader, long start, long end, int length, int bitrate, int panleft, int panright)
         {
             Bitrate = bitrate;
             PanLeft = panleft;
             PanRight = panright;
             SoundDataBlock = new RawSoundDataBlock(
-                    dataReader: reader,
                     start: start,
-                    end: end,
                     length: length
                     );
         }

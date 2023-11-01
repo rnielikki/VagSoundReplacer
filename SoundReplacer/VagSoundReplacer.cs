@@ -3,27 +3,23 @@
     public class VagSoundReplacer
     {
         private readonly string _path;
-        private VagSoundData _data;
+        private VagSoundData _soundData;
         public VagSoundReplacer(string path)
         {
             _path = path;
-            _data = new VagSoundData(_path);
+            _soundData = new VagSoundData(path);
         }
         public VagSoundBlock[] GetSoundData() 
         {
-            return _data.Blocks;
+            return _soundData.Blocks;
         }
         public bool ReplaceOne(int index, string path)
         {
-            return _data.Replace(index, path);
+            return _soundData.Replace(index, path);
         }
         public void Write(string outputPath)
         {
-            _data.Write(outputPath);
-        }
-        ~VagSoundReplacer()
-        {
-            _data.Dispose();
+            _soundData.Write(outputPath);
         }
     }
 }

@@ -62,11 +62,20 @@ namespace SoundReplacer
             return Reader.ReadBytes(length);
         }
         internal bool IsEOF() => Stream.Position > Stream.Length - CollectionSize;
+        public byte[] GetHash()
+        {
+            Stream.Position = 0;
+            return SHA256.Create().ComputeHash(Stream);
+        }
+        public bool IsIdenticalHash(byte[] hash)
+        {
+            Stream.Position = 0;
+            return SHA256.Create().ComputeHash(Stream).SequenceEqual(hash);
+        }
         public void Dispose()
         {
             Reader.Dispose();
             Stream.Dispose();
         }
-
     }
 }
