@@ -15,6 +15,17 @@
         {
             return _soundData.Replace(index, path);
         }
+        public bool HasAnyChange()
+        {
+            foreach (var block in _soundData.Blocks)
+            {
+                if (block.Wav.IsReplaced)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public void Write(string outputPath)
         {
             _soundData.Write(outputPath);
