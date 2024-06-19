@@ -9,7 +9,7 @@
 3. Open MFAudio, open the WAV file for input, do like this:
 ![Open Mfaudio. Input: 44100Hz, Samples 16bit UNCOMPRESSED WAV / Output XXX Hz, Sample 16bits, CHANNEL 1 (mono) COMPRESSED RAW](https://github.com/rnielikki/VagSoundReplacer/blob/main/WpfApp1/mfaudio.png)
 ### ⚠ **OUTPUT FREQUENCY DEPENDS ON THE FILE!** ⚠
-### ⚠ **For BGM.DAT Voice Theme, it is 11500Hz output** ⚠
+### ⚠ **For BGM.DAT Voice Theme, it is 11025 Hz output** ⚠
 4. Hit "Process!"
 5. Open **This program** (VagSoundReplacer) and load SGD to replace part.
 6. Find the target to replace in the list, and click "Browse..."
